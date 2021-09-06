@@ -1,13 +1,19 @@
 import React from 'react'
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai"
+import { useParams } from 'react-router'
 import "./Calendar.scss"
 
 export default function Calendar() {
+
+  let {id}  = useParams<dateParams>()
+  let [year, month] = id.split("-")
+  const monthList = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+
     return (
       <div className="calendar-container">
           <div className="calendar-header">
             <AiFillCaretLeft/>
-            <span>Septiembre - 2021</span>
+            <span>{monthList[parseInt(month)-1]} - {year}</span>
             <AiFillCaretRight/>
           </div>
           <div className="calendar-days">
