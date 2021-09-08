@@ -1,3 +1,3 @@
 type dateParams = {
-    id: string;
+    date: string
   }

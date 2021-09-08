@@ -1,20 +1,21 @@
 import React from 'react'
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai"
-import { useParams } from 'react-router'
+import { Link } from 'react-router-dom'
 import "./Calendar.scss"
 
-export default function Calendar() {
-
-  let {id}  = useParams<dateParams>()
-  let [year, month] = id.split("-")
-  const monthList = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+export default function Calendar(props) {
+    const monthList = ["Enero","Febrero","Marzo","Mayo","Abril","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
 
     return (
       <div className="calendar-container">
           <div className="calendar-header">
-            <AiFillCaretLeft/>
-            <span>{monthList[parseInt(month)-1]} - {year}</span>
-            <AiFillCaretRight/>
+            <Link style={{textDecoration:"none", color:"white"}} to={`/${props.year}-${parseInt(props.month)-1}`}>
+              <AiFillCaretLeft/>
+            </Link>
+            <span>{monthList[props.month-1]} - {props.year}</span>
+            <Link style={{textDecoration:"none", color:"white"}} to={`/${props.year}-${parseInt(props.month)+1}`}>
+              <AiFillCaretRight/>
+            </Link>
           </div>
           <div className="calendar-days">
             <p>Domingo</p>
