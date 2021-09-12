@@ -1,10 +1,44 @@
 import React from 'react'
+import { useState } from 'react'
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai"
 import { Link } from 'react-router-dom'
 import "./Calendar.scss"
 
 export default function Calendar(props) {
     const monthList = ["Enero","Febrero","Marzo","Mayo","Abril","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+    let lastDayOfMonth = new Date(props.year,props.month,0).getDate()
+
+    // Gets the first and the last day of the passed month, gets the first day of current month (-1 because Date is 0 indexed)
+    // Then maps it to an array where it gets all dates desending from the last day of the pased month
+    // Reverses the array and takes out the 0 index and then is maped to be displayed
+    let firstDayOfMonth = new Date(props.year,props.month-1,1).getDay()
+    let LastDayOfPassedMonth = new Date(props.year,props.month-2,0).getDate()
+    let lastDaysPastMonth = Array(firstDayOfMonth+1).fill(0).map((_,i)=>(LastDayOfPassedMonth-i))
+    lastDaysPastMonth.reverse()
+    lastDaysPastMonth.shift()
+    let lastDaysPastMonthDisplayed = lastDaysPastMonth.map((lastDaysPastMonthDisplayed) => (
+      <div className="day-cell different-month-day" key={lastDaysPastMonthDisplayed.toString()}>{lastDaysPastMonthDisplayed}</div>
+    ))
+
+    // The minus one is because Date() with integers is 0 indexed, if you put 0 you will get Jaunary and so on
+    let daysToComplete = new Date(props.year,props.month-1,lastDayOfMonth).getDay()
+    // Makes an array with all the missing days in next the month to complete the week 
+    // and then maps it to put te multiple html items
+    let daysToCompleteArray = Array(7-daysToComplete).fill(0).map((_, i) => i)
+    daysToCompleteArray.shift()
+    let daysToCompleteDisplayed = daysToCompleteArray.map((daysToCompleteArray) => (
+      <div className="day-cell different-month-day" key={daysToCompleteArray.toString()}>{daysToCompleteArray}</div>
+    ))
+
+    // Makes an array with all the days in the month and then maps it to put te multiple html items
+    let daysInMonth = Array(lastDayOfMonth+1).fill(0).map((_, i) => i)
+    daysInMonth.shift()
+    let daysDisplayed = daysInMonth.map((daysInMonth) => (
+      <div className="day-cell" key={daysInMonth.toString()}>
+        {daysInMonth}
+        <p>EHHHH</p>
+      </div>
+    ))
 
     return (
       <div className="calendar-container">
@@ -38,41 +72,9 @@ export default function Calendar(props) {
           <div className="calendar-days">
             <p>Sabado</p>
           </div>
-          <div className="day-cell different-month-day">29 </div>
-          <div className="day-cell different-month-day">30 </div>
-          <div className="day-cell different-month-day">31 </div>
-          <div className="day-cell">1 <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, aperiam earum. Minus dolorum dicta, quia rem inventore vitae quas. Officiis excepturi praesentium qui cum ad! Laborum enim excepturi consequatur assumenda.</p></div>
-          <div className="day-cell">2 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">3 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">4 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">5 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">6 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">7 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">8 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">9 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">10 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">11 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">12 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">13 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">14 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">15 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">16 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">17 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">18 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">19 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">20 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">21 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">22 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">23 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">24 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">25 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell" style={{borderBottomLeftRadius: "1.5rem"}}>26 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">27 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">28 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">29 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell">30 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate, eveniet excepturi dolorum harum sapiente officiis dolor odio, itaque sed, magni molestias pariatur. Exercitationem ad, numquam accusamus natus placeat similique. Voluptas.</p></div>
-          <div className="day-cell different-month-day">1 </div>
-          <div className="day-cell different-month-day" style={{borderBottomRightRadius: "1.5rem"}}>2 </div>
+          {lastDaysPastMonthDisplayed}
+          {daysDisplayed}
+          {daysToCompleteDisplayed}
       </div>
     )
 }
