@@ -33,10 +33,12 @@ export default function Calendar(props) {
     // Makes an array with all the days in the month and then maps it to put te multiple html items
     let daysInMonth = Array(lastDayOfMonth+1).fill(0).map((_, i) => i)
     daysInMonth.shift()
+    let noticiaText = props.data.map(a => a.noticia)
+    let noticiaUrl = props.data.map(a => a.urlNoticia)
     let daysDisplayed = daysInMonth.map((daysInMonth) => (
       <div className="day-cell" key={daysInMonth.toString()}>
         {daysInMonth}
-        <p>EHHHH</p>
+        <a href={noticiaUrl[daysInMonth-1]}>{noticiaText[daysInMonth-1]}</a>
       </div>
     ))
 

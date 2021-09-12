@@ -52,8 +52,10 @@
     text-overflow: clip;
     font-size: 14px;
     font-weight: 600;
-    p{
+    a{
         display: block;
+        color: black;
+        text-decoration-line: none;
         font-size: 12px;
         font-weight: 500;
         margin-top: 0.5em;

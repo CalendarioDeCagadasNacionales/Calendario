@@ -17,7 +17,9 @@ export default function DateFilter() {
         {fecha_gte:"${year}-${month}-01"}
         {fecha_lte:"${year}-${month}-${lastDay}"}
       ]
-      }){
+      },
+      order: fecha_ASC
+      ){
         items{
           noticia
           urlNoticia
