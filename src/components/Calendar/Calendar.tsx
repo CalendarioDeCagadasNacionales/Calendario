@@ -61,27 +61,13 @@ export default function Calendar(props) {
               <AiFillCaretRight style={{margin:"0px"}}/>
             </Link>
           </div>
-          <div className="calendar-days">
-            <p>Domingo</p>
-          </div>
-          <div className="calendar-days">
-            <p>Lunes</p>
-          </div>
-          <div className="calendar-days">
-            <p>Martes</p>
-          </div>
-          <div className="calendar-days">
-            <p>Miercoles</p>
-          </div>
-          <div className="calendar-days">
-            <p>Jueves</p>
-          </div>
-          <div className="calendar-days">
-            <p>Viernes</p>
-          </div>
-          <div className="calendar-days">
-            <p>Sabado</p>
-          </div>
+          <div className="calendar-days">Domingo</div>
+          <div className="calendar-days">Lunes</div>
+          <div className="calendar-days">Martes</div>
+          <div className="calendar-days">Miercoles</div>
+          <div className="calendar-days">Jueves</div>
+          <div className="calendar-days">Viernes</div>
+          <div className="calendar-days">Sabado</div>
           {lastDaysPastMonthDisplayed}
           {daysDisplayed}
           {daysToCompleteDisplayed}
