@@ -45,12 +45,12 @@ export default function Calendar(props) {
     return (
       <div className="calendar-container">
           <div className="calendar-header">
-            <Link style={{textDecoration:"none", color:"white"}} to={`/${props.year}-${parseInt(props.month)-1}`}>
-              <AiFillCaretLeft/>
+            <Link style={{textDecoration:"none", color:"white"}} to={`/${props.year}-${parseInt(props.month)-1 <= 9 ? "0"+(parseInt(props.month)-1) : parseInt(props.month)-1}`}>
+              <AiFillCaretLeft style={{margin:"0px"}}/>
             </Link>
             <span>{monthList[props.month-1]} - {props.year}</span>
-            <Link style={{textDecoration:"none", color:"white"}} to={`/${props.year}-${parseInt(props.month)+1}`}>
-              <AiFillCaretRight/>
+            <Link style={{textDecoration:"none", color:"white"}} to={`/${props.year}-${parseInt(props.month)+1 <= 9 ? "0"+(parseInt(props.month)+1) : parseInt(props.month)+1}`}>
+              <AiFillCaretRight style={{margin:"0px"}}/>
             </Link>
           </div>
           <div className="calendar-days">
