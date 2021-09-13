@@ -5,7 +5,8 @@ import "./app.scss"
 
 export default function App() {
     let currentDate = new Date()
-    let redirectDate = `/${currentDate.getFullYear()}-${currentDate.getMonth()+1}`
+    let month = currentDate.getMonth()+1
+    let redirectDate = `/${currentDate.getFullYear()}-${month <= 9 ? "0"+month.toString() : month }`
 
     return (
         <BrowserRouter>
