@@ -1,5 +1,6 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import ReactTooltip from 'react-tooltip'
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai"
 import { Link } from 'react-router-dom'
 import "./Calendar.scss"
@@ -38,9 +39,16 @@ export default function Calendar(props) {
     let daysDisplayed = daysInMonth.map((daysInMonth) => (
       <div className="day-cell" key={daysInMonth.toString()}>
         {daysInMonth}
-        <a href={noticiaUrl[daysInMonth-1]} target="_blank">{noticiaText[daysInMonth-1]}</a>
+        <a href={noticiaUrl[daysInMonth-1]} target="_blank" data-tip={noticiaText[daysInMonth-1]}>
+          {noticiaText[daysInMonth-1]}
+        </a>
+        <ReactTooltip place="right" effect="solid" border={true} borderColor="#0a0a0a" backgroundColor="#0a0a0a"/>
       </div>
     ))
+
+    useEffect(() => {
+      ReactTooltip.rebuild();
+    });
 
     return (
       <div className="calendar-container">
