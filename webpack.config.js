@@ -1,5 +1,6 @@
 const Path = require("path")
 const HtmlPlugin = require("html-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     entry: "./src/index.tsx",
@@ -36,11 +37,11 @@ module.exports = {
               },
             {
                 test:/\.css$/i,
-                use:["style-loader","css-loader"]
+                use:[MiniCssExtractPlugin.loader,"css-loader"]
             },
             {
                 test:/\.s[ac]ss$/i,
-                use:["style-loader","css-loader","sass-loader"]
+                use:[MiniCssExtractPlugin.loader,"css-loader","sass-loader"]
             },
             {
                 test:/\.html$/,
@@ -53,6 +54,9 @@ module.exports = {
     plugins:[
         new HtmlPlugin({
             template:"./public/index.html"
+        }),
+        new MiniCssExtractPlugin({
+          filename: "styles.css"
         })
     ]
 }

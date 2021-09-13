@@ -68,6 +68,12 @@
             text-decoration-line: underline;
         }
     }
+    &:nth-last-child(7){
+        border-bottom-left-radius: 1.5rem;
+    }
+    &:nth-last-child(1){
+        border-bottom-right-radius: 1.5rem;
+    }
 }
 
 .different-month-day{
