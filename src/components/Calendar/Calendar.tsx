@@ -38,7 +38,7 @@ export default function Calendar(props) {
     let daysDisplayed = daysInMonth.map((daysInMonth) => (
       <div className="day-cell" key={daysInMonth.toString()}>
         {daysInMonth}
-        <a href={noticiaUrl[daysInMonth-1]}>{noticiaText[daysInMonth-1]}</a>
+        <a href={noticiaUrl[daysInMonth-1]} target="_blank">{noticiaText[daysInMonth-1]}</a>
       </div>
     ))
 
