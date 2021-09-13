@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../Layout/Layout'
 import NotFound from '../../notFound/404'
 import Calendar from '../Calendar/Calendar'
-import { useParams } from 'react-router'
+import { useParams, useHistory } from 'react-router'
 
 export default function DateFilter() {
   let {date}  = useParams<dateParams>()
@@ -10,6 +10,9 @@ export default function DateFilter() {
   const [monthData, setmonthData] = useState([])
   const [pageWillLoad, setpageWillLoad] = useState(true)
   const lastDay = new Date(parseInt(year),parseInt(month),0).getDate()
+  if (parseInt(month) > 12) {
+    useHistory().push(`/${parseInt(year)+1}-01`)
+  }
 
   const query = `{
       diaCollection(where:{

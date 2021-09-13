@@ -6,8 +6,6 @@ import "./404.scss"
 export default function NotFound() {
     let currentDate = new Date()
     let month = currentDate.getMonth()+1
-
-    console.log()
     let redirectDate = `/${currentDate.getFullYear()}-${month <= 9 ? "0"+month.toString() : month }`
     return (
         <Layout>
