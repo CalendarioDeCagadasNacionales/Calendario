@@ -14,7 +14,11 @@ export default function Calendar(props) {
     // Reverses the array and takes out the 0 index and then is maped to be displayed
     let firstDayOfMonth = new Date(props.year,props.month-1,1).getDay()
     let LastDayOfPassedMonth = new Date(props.year,props.month-2,0).getDate()
-    let lastDaysPastMonth = Array(firstDayOfMonth+1).fill(0).map((_,i)=>(LastDayOfPassedMonth-i))
+    let lastDaysPastMonth = []
+    for (let index = 0; index < firstDayOfMonth+1; index++) {
+      lastDaysPastMonth.push(LastDayOfPassedMonth-index)
+    }
+
     lastDaysPastMonth.reverse()
     lastDaysPastMonth.shift()
     let lastDaysPastMonthDisplayed = lastDaysPastMonth.map((lastDaysPastMonthDisplayed) => (
@@ -25,14 +29,21 @@ export default function Calendar(props) {
     let daysToComplete = new Date(props.year,props.month-1,lastDayOfMonth).getDay()
     // Makes an array with all the missing days in next the month to complete the week 
     // and then maps it to put te multiple html items
-    let daysToCompleteArray = Array(7-daysToComplete).fill(0).map((_, i) => i)
+    let daysToCompleteArray = []
+    for (let index = 0; index < 7-daysToComplete; index++) {
+      daysToCompleteArray.push(index)
+    }
     daysToCompleteArray.shift()
     let daysToCompleteDisplayed = daysToCompleteArray.map((daysToCompleteArray) => (
       <div className="day-cell different-month-day" key={daysToCompleteArray.toString()}>{daysToCompleteArray}</div>
     ))
 
     // Makes an array with all the days in the month and then maps it to put te multiple html items
-    let daysInMonth = Array(lastDayOfMonth+1).fill(0).map((_, i) => i)
+    //let daysInMonth = Array(lastDayOfMonth+1).fill(0).map((_, i) => i)
+    let daysInMonth = []
+    for (let index = 0; index < lastDayOfMonth+1; index++) {
+      daysInMonth.push(index)
+    }
     daysInMonth.shift()
     let noticiaText = props.data.map(a => a.noticia)
     let noticiaUrl = props.data.map(a => a.urlNoticia)

@@ -24,7 +24,7 @@ module.exports = {
                   options: {
                     jsc: {
                       loose: true,
-                      target: "es2016",
+                      target: "es2015",
                       parser: {
                         syntax: "typescript",
                         tsx: true,
