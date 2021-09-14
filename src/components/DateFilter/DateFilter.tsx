@@ -7,12 +7,10 @@ import { useParams, useHistory } from 'react-router'
 export default function DateFilter() {
   let {date}  = useParams<dateParams>()
   let [year, month] = date.split("-")
+  const history = useHistory()
   const [monthData, setmonthData] = useState([])
   const [pageWillLoad, setpageWillLoad] = useState(true)
   const lastDay = new Date(parseInt(year),parseInt(month),0).getDate()
-  if (parseInt(month) > 12) {
-    useHistory().push(`/${parseInt(year)+1}-01`)
-  }
 
   const query = `{
       diaCollection(where:{
@@ -57,6 +55,17 @@ export default function DateFilter() {
       setpageWillLoad(false)
     }
   }, [query])
+
+  useEffect(() => {
+    switch (month) {
+      case "13":
+        history.push(`/${parseInt(year)+1}-01`)
+        break
+      case "00":
+        history.push(`/${parseInt(year)-1}-12`)
+        break
+    }
+  }, [date])
 
 // GraphiQL contentful api: https://graphql.contentful.com/content/v1/spaces/gbvho13kntsg/explore?access_token=cYi4Cxr8OMOh64p5eXO7HQESzk-g0W7ZhNYN2x3T9u4
 
