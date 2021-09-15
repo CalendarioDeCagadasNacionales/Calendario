@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom"
+import { HashRouter, Route, Switch, Redirect } from "react-router-dom"
 import DateFilter from '../components/DateFilter/DateFilter'
 import "./app.scss"
 
@@ -9,7 +9,7 @@ export default function App() {
     let redirectDate = `/${currentDate.getFullYear()}-${month <= 9 ? "0"+month.toString() : month }`
 
     return (
-        <BrowserRouter>
+        <HashRouter>
           <Switch>
             <Route path="/:date">
               <DateFilter/>
@@ -18,6 +18,6 @@ export default function App() {
               <Redirect to={redirectDate}/>
             </Route>
           </Switch>
-        </BrowserRouter>
+        </HashRouter>
     )
 }

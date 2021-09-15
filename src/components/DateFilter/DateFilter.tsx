@@ -6,7 +6,8 @@ import { useParams, useHistory } from 'react-router'
 
 export default function DateFilter() {
   let {date}  = useParams<dateParams>()
-  let [year, month] = date.split("-")
+  const [year, month] = date.split("-")
+  const accessToken = process.env.TOKEN
   const history = useHistory()
   const [monthData, setmonthData] = useState([])
   const [pageWillLoad, setpageWillLoad] = useState(true)
@@ -37,7 +38,7 @@ export default function DateFilter() {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
-                    Authorization: "Bearer cYi4Cxr8OMOh64p5eXO7HQESzk-g0W7ZhNYN2x3T9u4",
+                    Authorization: `Bearer ${accessToken}`,
                   },
                   body: JSON.stringify({ query }),
                 })
@@ -66,8 +67,6 @@ export default function DateFilter() {
         break
     }
   }, [date])
-
-// GraphiQL contentful api: https://graphql.contentful.com/content/v1/spaces/gbvho13kntsg/explore?access_token=cYi4Cxr8OMOh64p5eXO7HQESzk-g0W7ZhNYN2x3T9u4
 
   if (pageWillLoad) {
       return(
