@@ -1,38 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
+import { useParams, useHistory } from 'react-router'
 import Layout from '../Layout/Layout'
 import NotFound from '../../notFound/404'
 import Calendar from '../Calendar/Calendar'
-import { useParams, useHistory } from 'react-router'
+import { queryTemplate } from '../../utils/Helper'
 
 export default function DateFilter() {
-  let {date}  = useParams<dateParams>()
+  const {date}  = useParams<dateParams>()
   const [year, month] = date.split("-")
   const accessToken = process.env.TOKEN
   const history = useHistory()
   const [monthData, setmonthData] = useState([])
   const [pageWillLoad, setpageWillLoad] = useState(true)
-  const lastDay = new Date(parseInt(year),parseInt(month),0).getDate()
-
-  const query = `{
-      diaCollection(where:{
-        AND:[
-        {fecha_gte:"${year}-${month}-01"}
-        {fecha_lte:"${year}-${month}-${lastDay}"}
-      ]
-      },
-      order: fecha_ASC
-      ){
-        items{
-          noticia
-          urlNoticia
-          fecha
-        }
-      }
-    }`
+  const query = useMemo(() => queryTemplate(year, month), [year,month])
 
   useEffect(() => {
-    let response
     try {
+      let response
       const fetchMonthData = async () => {
          response = await fetch(`https://graphql.contentful.com/content/v1/spaces/gbvho13kntsg`, {
                   method: "POST",
