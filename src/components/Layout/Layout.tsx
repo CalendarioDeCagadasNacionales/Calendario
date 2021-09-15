@@ -1,4 +1,5 @@
 import React from 'react'
+import { RiCopyleftLine } from "react-icons/ri"
 import "./Layout.scss"
 
 export default function Layout({ children }) {
@@ -11,7 +12,7 @@ export default function Layout({ children }) {
                 { children }
             </section>
             <footer className="footer-container">
-                2021🄯
+                2021<RiCopyleftLine/>
             </footer>
         </div>
     )
