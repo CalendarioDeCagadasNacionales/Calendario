@@ -19,7 +19,7 @@ jobs:
         npm install
         npm run-script build
       env:
-        TOKEN: ${{secrets.TOKEN}}
+        TOKEN: ${{secrets.CONTENTFUL-TOKEN}}
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
