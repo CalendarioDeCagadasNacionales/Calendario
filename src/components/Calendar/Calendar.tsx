@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import ReactTooltip from 'react-tooltip'
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai"
 import { Link } from 'react-router-dom'
@@ -7,6 +7,9 @@ import "./Calendar.scss"
 
 export default function Calendar(props) {
     const monthList = ["Enero","Febrero","Marzo","Mayo","Abril","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+    const weekDays = ["Domingo","Lunes","Martes","Miecoles","Jueves","Viernes","Sabado"]
+    const previousMonth = useMemo(() => parseInt(props.month)-1 <= 9 ? "0"+(parseInt(props.month)-1) : parseInt(props.month)-1, props.month )
+    const nextMonth = useMemo(() => parseInt(props.month)+1 <= 9 ? "0"+(parseInt(props.month)+1) : parseInt(props.month)+1, props.month)
     let lastDayOfMonth = new Date(props.year,props.month,0).getDate()
 
     // Gets the first and the last day of the passed month, gets the first day of current month (-1 because Date is 0 indexed)
@@ -57,6 +60,10 @@ export default function Calendar(props) {
       </div>
     ))
 
+    const daysInWeek = weekDays.map((day)=>(
+      <div className="calendar-days">{day}</div>
+    ))
+
     useEffect(() => {
       ReactTooltip.rebuild();
     });
@@ -64,21 +71,15 @@ export default function Calendar(props) {
     return (
       <div className="calendar-container">
           <div className="calendar-header">
-            <Link style={{textDecoration:"none", color:"white"}} to={`/${props.year}-${parseInt(props.month)-1 <= 9 ? "0"+(parseInt(props.month)-1) : parseInt(props.month)-1}`}>
+            <Link style={{textDecoration:"none", color:"white"}} to={`/${props.year}-${previousMonth}`}>
               <AiFillCaretLeft style={{margin:"0px"}}/>
             </Link>
             <span>{monthList[props.month-1]} - {props.year}</span>
-            <Link style={{textDecoration:"none", color:"white"}} to={`/${props.year}-${parseInt(props.month)+1 <= 9 ? "0"+(parseInt(props.month)+1) : parseInt(props.month)+1}`}>
+            <Link style={{textDecoration:"none", color:"white"}} to={`/${props.year}-${nextMonth}`}>
               <AiFillCaretRight style={{margin:"0px"}}/>
             </Link>
           </div>
-          <div className="calendar-days">Domingo</div>
-          <div className="calendar-days">Lunes</div>
-          <div className="calendar-days">Martes</div>
-          <div className="calendar-days">Miercoles</div>
-          <div className="calendar-days">Jueves</div>
-          <div className="calendar-days">Viernes</div>
-          <div className="calendar-days">Sabado</div>
+          {daysInWeek}
           {lastDaysPastMonthDisplayed}
           {daysDisplayed}
           {daysToCompleteDisplayed}
