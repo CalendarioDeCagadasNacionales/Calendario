@@ -12,7 +12,7 @@ export default function Layout({ children }) {
                 { children }
             </section>
             <footer className="footer-container">
-                2021<RiCopyleftLine/>
+                <p>Tenes alguna noticia que quieras contarnos? envíanosla a <a href="mailto:cagadasnacionalescontacto@gmail.com">cagadasnacionalescontacto@gmail.com</a> - 2021<RiCopyleftLine/></p>
             </footer>
         </div>
     )
