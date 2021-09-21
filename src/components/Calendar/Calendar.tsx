@@ -4,13 +4,14 @@ import ReactTooltip from 'react-tooltip'
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai"
 import { Link } from 'react-router-dom'
 import "./Calendar.scss"
+import { padzero } from '../../utils/Helper'
 
 const monthList = ["Enero","Febrero","Marzo","Mayo","Abril","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
 const weekDays = ["Domingo","Lunes","Martes","Miecoles","Jueves","Viernes","Sabado"]
 
 export default function Calendar(props) {
-    const previousMonth = useMemo(() => parseInt(props.month)-1 <= 9 ? "0"+(parseInt(props.month)-1) : parseInt(props.month)-1, props.month )
-    const nextMonth = useMemo(() => parseInt(props.month)+1 <= 9 ? "0"+(parseInt(props.month)+1) : parseInt(props.month)+1, props.month)
+    const previousMonth = useMemo(() => padzero(props.month, false), props.month )
+    const nextMonth = useMemo(() => padzero(props.month, true), props.month)
     let lastDayOfMonth = new Date(props.year,props.month,0).getDate()
 
     // Gets the first and the last day of the passed month, gets the first day of current month (-1 because Date is 0 indexed)

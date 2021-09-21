@@ -1,4 +1,4 @@
-export const queryTemplate = (year, month) =>{
+export const queryTemplate = (year: string, month:string ) =>{
     const lastDay = new Date(parseInt(year),parseInt(month),0).getDate()
     const query =`{
       diaCollection(where:{
@@ -17,4 +17,13 @@ export const queryTemplate = (year, month) =>{
       }
     }`
     return query
+}
+
+export const padzero = (monthString: string, nextMonth: boolean) => {
+  const parsedMonth = parseInt(monthString)
+  if (nextMonth) {
+    return `${parsedMonth+1 <= 9 ? '0' : ''}${parsedMonth+1}`
+  } else {
+    return `${parsedMonth-1 <= 9 ? '0' : ''}${parsedMonth-1}`
+  }
 }
