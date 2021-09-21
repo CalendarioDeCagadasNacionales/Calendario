@@ -1,6 +1,6 @@
-export const queryTemplate = (year: string, month:string ) =>{
-    const lastDay = new Date(parseInt(year),parseInt(month),0).getDate()
-    const query =`{
+export const queryTemplate = (year: string, month:string) => {
+  const lastDay = new Date(parseInt(year, 10), parseInt(month, 10), 0).getDate();
+  const query = `{
       diaCollection(where:{
         AND:[
         {fecha_gte:"${year}-${month}-01"}
@@ -15,15 +15,14 @@ export const queryTemplate = (year: string, month:string ) =>{
           fecha
         }
       }
-    }`
-    return query
-}
+    }`;
+  return query;
+};
 
 export const padzero = (monthString: string, nextMonth: boolean) => {
-  const parsedMonth = parseInt(monthString)
+  const parsedMonth = parseInt(monthString, 10);
   if (nextMonth) {
-    return `${parsedMonth+1 <= 9 ? '0' : ''}${parsedMonth+1}`
-  } else {
-    return `${parsedMonth-1 <= 9 ? '0' : ''}${parsedMonth-1}`
+    return `${parsedMonth + 1 <= 9 ? '0' : ''}${parsedMonth + 1}`;
   }
-}
+  return `${parsedMonth - 1 <= 9 ? '0' : ''}${parsedMonth - 1}`;
+};
