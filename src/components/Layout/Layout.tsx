@@ -14,7 +14,7 @@ export default function Layout({ children }) {
       <footer className="footer-container">
         <p>
           Tenes alguna noticia que quieras contarnos? envíanosla a
-          <a href="mailto:cagadasnacionalescontacto@gmail.com">cagadasnacionalescontacto@gmail.com</a>
+          <a href="mailto:cagadasnacionalescontacto@gmail.com"> cagadasnacionalescontacto@gmail.com</a>
           {' '}
           - 2021
           <RiCopyleftLine />
